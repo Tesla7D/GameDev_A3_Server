@@ -1,14 +1,17 @@
 <html>
 <head>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <script>
-	var myVar = <%- JSON.stringify(sessionName) %>;
+	$( document ).ready(function() {
+		var sessionName = <%- JSON.stringify(sessionName) %>;
+		var title = <%- JSON.stringify(title) %>;
 
-	document.getElementById("sub").innerHTML = "New text!";
+		$("#sub").html("" + title);
+	});
 </script>
 <body>
-	<h1>Hello World!</h1>
+	<h1>Observer system</h1>
 	<h2 id="sub"></h2>
 
 	<section id="gamePage"  style="visibility:hidden">

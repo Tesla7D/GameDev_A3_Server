@@ -117,7 +117,11 @@ app.get("/session/:sessionName",function(req,res){
     query.then(function (result) {
             console.log(JSON.stringify(result));
             if (result.length){
-                res.render("session.ejs", { "sessionName": req.params.sessionName });
+                res.render("session.ejs", 
+                {
+                     "sessionName": req.params.sessionName,
+                     "title": result[0]["title"]
+                });
             }else{
                 res.render("404.ejs");
             }
