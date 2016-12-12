@@ -147,4 +147,4 @@ app.delete("/session/:sessionName",function(req,res){
         console.log('Web server listening on port ' + port + '...');
 //        database_manager.test();
     });    
-})(1337);
+})(process.env.PORT || 8080);
