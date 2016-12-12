@@ -25,6 +25,7 @@ app.set('view engine', 'ejs');
 
 // Set pages path to 'www'
 app.use(express.static(path.join(__dirname, 'www')));
+app.use(express.static('public'))
 
 // [ Middleware to get the request body ]
 app.use (function(req, res, next) {
@@ -151,4 +152,4 @@ app.delete("/session/:sessionName",function(req,res){
         console.log('Web server listening on port ' + port + '...');
 //        database_manager.test();
     });    
-})(process.env.PORT || 8080);
+})(1337);

@@ -1,6 +1,7 @@
 <html>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src=""></script>
 </head>
 <script>
 	$( document ).ready(function() {
@@ -14,10 +15,22 @@
 	<h1>Observer system</h1>
 	<h2 id="sub"></h2>
 
-	<section id="gamePage"  style="visibility:hidden">
-        <button class="abilityButton">Speed</button>
-        <button class="abilityButton">Jump</button>
-        <button class="abilityButton">Fire</button>
-    </section>
+	<div id="game">
+            <div id="abilities">
+                <input class="ability" type="button" value="Increase Speed" style="background-image:url(img/increaseSpeed.png)" />
+                <input class="ability" type="button" value="Decrease Speed" style="background-image:url(img/decreaseSpeed.png)"  />
+                <input class="ability" type="button" value="Increase Jump Height" style="background-image:url(img/increaseJump.png)"  />
+                <input class="ability" type="button" value="Decrease Jump Height" style="background-image:url(img/decreaseJump.png)"  />
+                <input class="ability" type="button" value="Allow Tripple Jump" style="background-image:url(img/trippleJump.png)"  />
+                <input class="ability" type="button" value="Allow Single Jump" style="background-image:url(img/singleJump.png)"  />
+            </div>
+
+            <div id="chat">
+                <div id="chatLog"></div>
+                <div id="chatTextBoxContainer">
+                    <input type="text" id="chatTextBox" placeholder="Enter your message here" />
+                </div>
+            </div>        
+        </div>
 </body>
 </html>
