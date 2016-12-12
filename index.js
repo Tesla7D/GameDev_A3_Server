@@ -1,6 +1,7 @@
 // [ Dependencies ]
 var express = require('express');           // Routing
 var cors    = require('cors');              // Getting around cross domain restrictions
+var http    = require('http');              // HTTP header library
 var fs      = require('fs');                // File system access
 var path    = require('path');              // File Path parsing
 var knex    = require("knex");              // SQL query builder
@@ -18,6 +19,12 @@ var db = knex(config);
 
 // [ Create the express app ]
 var app = express();
+
+// Set render engine to ejs
+app.set('view engine', 'ejs');
+
+// Set pages path to 'www'
+app.use(express.static(path.join(__dirname, 'www')));
 
 // [ Middleware to get the request body ]
 app.use (function(req, res, next) {
@@ -60,16 +67,19 @@ app.use (function(req, res, next) {
 
 // [ Middleware to authenticate user ]
 app.use (function(req, res, next) {
-    if(req.path == "/token" || req.path == "/token/"){
+    if(req.path == "/token" || req.path == "/token/"
+       || req.path.startsWith("/session")){
         // User doesn't need to be authenticated to ask for token, anyone is allowed to do that
         
         next();
         return;
     }
     
+    next();
     // [ Make sure token is valid ]
     var token = req.headers["x-token"];
     if(!token || token == ""){
+        console.log(req.path);
         res.end(JSON.stringify({success:false}));
         return;
     }
@@ -92,12 +102,43 @@ app.use (function(req, res, next) {
         
             res.end(error("No matching token in database"));
         });
-    
 });
 
-app.post("/ability",function(req,res){
+app.get("/session/:sessionName",function(req,res){
+    console.log("Git new session request: " + req.params.sessionName);
+    console.log(req.body);
+
+    var query = db
+        .select("title","hasPassword")
+        .from("session")
+        .where("sessionName", req.params.sessionName);
+
+    // console.log(query);
+    query.then(function (result) {
+            console.log(JSON.stringify(result));
+            if (result.length){
+                res.render("session.ejs", { "sessionName": req.params.sessionName });
+            }else{
+                res.render("404.ejs");
+            }
+        })
+        .catch(function(err) { 
+			console.log(err);
+            res.render("404.ejs");
+        });
+});
+
+app.post("/ability:sessionName",function(req,res){
     console.log("Git new ability request:");
     console.log(req.body);
+    res.end(JSON.stringify({success:true}));
+});
+
+app.delete("/session/:sessionName",function(req,res){
+    console.log("Git new session request: " + req.params.sessionName);
+    console.log(req.body);
+
+    res.render("session.html");
 });
 
 // [ Listen for requests ]

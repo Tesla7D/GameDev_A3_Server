@@ -1,0 +1,20 @@
+<html>
+<head>
+
+</head>
+<script>
+	var myVar = <%- JSON.stringify(sessionName) %>;
+
+	document.getElementById("sub").innerHTML = "New text!";
+</script>
+<body>
+	<h1>Hello World!</h1>
+	<h2 id="sub"></h2>
+
+	<section id="gamePage"  style="visibility:hidden">
+        <button class="abilityButton">Speed</button>
+        <button class="abilityButton">Jump</button>
+        <button class="abilityButton">Fire</button>
+    </section>
+</body>
+</html>

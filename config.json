@@ -1,9 +1,9 @@
 {
   "client": "mysql",
   "connection": {
-    "host" : "127.0.0.1",
-    "user" : "root",
-    "password" : "Jratva-online1",
-    "database" : "gamedev_a3"
+    "host" : "us-cdbr-iron-east-04.cleardb.net",
+    "user" : "bc4eb38ff3a79e",
+    "password" : "2b8332f8",
+    "database" : "heroku_73c85a89435eeea"
   }
 }
